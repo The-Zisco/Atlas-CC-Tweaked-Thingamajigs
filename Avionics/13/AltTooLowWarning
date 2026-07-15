@@ -1,0 +1,32 @@
+rednet.open("left")
+
+while true do
+local pose = sublevel.getLogicalPose()
+local height = pose.position.y
+print("Current altitiude:" .. height)
+
+local mon = peripheral.wrap("monitor_2")
+mon.setTextColour(colors.white)
+
+local senderID, message = rednet.receive()
+
+local Flight = message [1]
+local Ground = message [2]
+
+print("Situ is flight? =" .. tostring(Flight))
+print("Situ is ground? =" .. tostring(Ground))
+
+sleep(0.1)
+
+if height > 90 then
+end
+
+if Flight == true then
+if height < 90 then
+mon.setCursorPos(1,1)
+mon.setTextColour(colors.red)
+mon.write("Too Low")
+shell.run("TooLowAlertPlayer.lua")
+end
+end
+end
